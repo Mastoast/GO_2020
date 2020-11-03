@@ -7,9 +7,9 @@ script/source = "extends KinematicBody2D
 
 var target = preload(\"res://Objects/Target.tscn\")
 
-export (int) var run_max_speed = 100
-export (int) var run_acceleration = 20
-export (int) var run_friction = 10
+export (int) var run_max_speed = 700
+export (int) var run_acceleration = 140
+export (int) var run_friction = 70
 
 export (int) var jump_speed = -600
 export (int) var gravity = 1500
@@ -37,24 +37,28 @@ func get_movement():
 		jumping = true
 		velocity.y = jump_speed
 	
-	get_parent().get_node(\"Debug\").text = String(velocity.x)
-	
-	
-	if not (right or left):
+	if not (right or left) or abs(velocity.x) > run_max_speed:
+		var signX = sign(velocity.x)
 		velocity.x -= sign(velocity.x) * run_friction
+		if sign(velocity.x) != signX:
+			velocity.x = 0
 	else:
 		if right:
 			velocity.x += run_acceleration
 		if left:
 			velocity.x -= run_acceleration
-	
-	velocity.x = clamp(velocity.x, -run_max_speed, run_max_speed)
 
 func _process(delta):
 	# Slice to target
 	if Input.is_action_just_pressed(\"mouse_left\"):
 		if targets.size() != 0:
 			var old_tar = targets.pop_front()
+			var diff = old_tar.position - self.position
+
+			# Dash inertie
+			diff = diff.normalized() * abs(jump_speed)
+			velocity = diff
+
 			self.position = old_tar.position
 			old_tar.get_parent().remove_child(old_tar)
 			old_tar.free()

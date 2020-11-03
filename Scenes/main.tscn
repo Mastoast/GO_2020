@@ -11,76 +11,77 @@ extents = Vector2( 12.4844, 12.3887 )
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 1033.75, 599.648 )
+current = true
+zoom = Vector2( 2, 2 )
+
 [node name="Char" parent="." instance=ExtResource( 1 )]
+position = Vector2( 503.33, 997.233 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( 1002.04, 275.897 )
+[node name="Room" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Room"]
+position = Vector2( 2074.04, 863.897 )
 scale = Vector2( 2.74751, 27.7261 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+[node name="Sprite" type="Sprite" parent="Room/StaticBody2D"]
 texture = SubResource( 1 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Room/StaticBody2D"]
 shape = SubResource( 2 )
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2( 0.726135, 281.843 )
+[node name="StaticBody2D3" type="StaticBody2D" parent="Room"]
+position = Vector2( 8.72613, 849.843 )
 scale = Vector2( 2.74751, 27.7261 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="StaticBody2D3"]
+[node name="Sprite" type="Sprite" parent="Room/StaticBody2D3"]
 texture = SubResource( 1 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D3"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Room/StaticBody2D3"]
 shape = SubResource( 2 )
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2( 521.599, 586.28 )
-scale = Vector2( 42.52, 1 )
+[node name="StaticBody2D2" type="StaticBody2D" parent="Room"]
+position = Vector2( 1173.02, 1202.62 )
+scale = Vector2( 100, 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="StaticBody2D2"]
+[node name="Sprite" type="Sprite" parent="Room/StaticBody2D2"]
 texture = SubResource( 1 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Room/StaticBody2D2"]
 shape = SubResource( 2 )
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2( 791.547, 408.832 )
+[node name="StaticBody2D4" type="StaticBody2D" parent="Room"]
+position = Vector2( 1631.55, 1048.83 )
 scale = Vector2( 9.68, 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="StaticBody2D4"]
+[node name="Sprite" type="Sprite" parent="Room/StaticBody2D4"]
 texture = SubResource( 1 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D4"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Room/StaticBody2D4"]
 shape = SubResource( 2 )
 
-[node name="StaticBody2D5" type="StaticBody2D" parent="."]
-position = Vector2( 346.038, 363.526 )
+[node name="StaticBody2D5" type="StaticBody2D" parent="Room"]
+position = Vector2( 1338.04, 1127.53 )
 scale = Vector2( 9.68, 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="StaticBody2D5"]
+[node name="Sprite" type="Sprite" parent="Room/StaticBody2D5"]
 texture = SubResource( 1 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D5"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Room/StaticBody2D5"]
 shape = SubResource( 2 )
-
-[node name="Debug" type="TextEdit" parent="."]
-margin_right = 109.0
-margin_bottom = 42.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
