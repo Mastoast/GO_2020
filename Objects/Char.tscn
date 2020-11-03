@@ -1,0 +1,120 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+var target = preload(\"res://Objects/Target.tscn\")
+
+export (int) var run_max_speed = 100
+export (int) var run_acceleration = 20
+export (int) var run_friction = 10
+
+export (int) var jump_speed = -600
+export (int) var gravity = 1500
+export (float) var fall_multiplier = 1.8
+
+
+var targets : Array
+
+var velocity = Vector2()
+var jumping = false
+var n_max_target = 1
+
+func _ready():
+	pass
+
+func _enter_tree():
+	pass
+
+func get_movement():
+	var right = Input.is_action_pressed('ui_right')
+	var left = Input.is_action_pressed('ui_left')
+	var jump = Input.is_action_just_pressed('ui_up')
+
+	if jump and (is_on_floor() or is_on_wall()):
+		jumping = true
+		velocity.y = jump_speed
+	
+	get_parent().get_node(\"Debug\").text = String(velocity.x)
+	
+	
+	if not (right or left):
+		velocity.x -= sign(velocity.x) * run_friction
+	else:
+		if right:
+			velocity.x += run_acceleration
+		if left:
+			velocity.x -= run_acceleration
+	
+	velocity.x = clamp(velocity.x, -run_max_speed, run_max_speed)
+
+func _process(delta):
+	# Slice to target
+	if Input.is_action_just_pressed(\"mouse_left\"):
+		if targets.size() != 0:
+			var old_tar = targets.pop_front()
+			self.position = old_tar.position
+			old_tar.get_parent().remove_child(old_tar)
+			old_tar.free()
+
+	# Pop target
+	if Input.is_action_just_pressed(\"mouse_right\"):
+		var new_tar = target.instance()
+		self.get_parent().add_child(new_tar)
+		new_tar.position = self.position
+		targets.append(new_tar)
+		# Check max targets
+		if targets.size() > n_max_target:
+			# Remove oldest target
+			var old_tar = targets.pop_front()
+			old_tar.get_parent().remove_child(old_tar)
+			old_tar.free()
+	# Refresh visuals
+	update()
+
+func _physics_process(delta):
+	get_movement()
+	# Jump adaptative jump
+	if(velocity.y <= 0 && Input.is_action_pressed('ui_up')):
+		velocity.y += gravity * delta
+	else:
+		velocity.y += gravity * fall_multiplier * delta
+
+	if jumping and is_on_floor():
+		jumping = false
+	velocity = move_and_slide(velocity, Vector2(0, -1))
+
+func _draw():
+	for tar in targets:
+		draw_line(Vector2(0,0), tar.position - self.position, Color.aliceblue)
+"
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 12.8059, 30.528 )
+
+[node name="Char" type="KinematicBody2D"]
+position = Vector2( 275.33, 209.233 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 4.47035e-05, 0 )
+scale = Vector2( 0.435023, 1 )
+frames = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
