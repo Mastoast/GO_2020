@@ -23,6 +23,8 @@ var jumping = false
 var n_max_target = 1
 
 func _ready():
+	var trail = get_parent().get_node(\"Trail\")
+	trail.trail(Vector2(500,500), Vector2(250,250))
 	pass
 
 func _enter_tree():
@@ -33,10 +35,8 @@ func get_movement():
 	var left = Input.is_action_pressed('ui_left')
 	var jump = Input.is_action_just_pressed('ui_up')
 
-	if jump and (is_on_floor() or is_on_wall()):
-		jumping = true
-		velocity.y = jump_speed
-	
+
+	# Run	
 	if not (right or left) or abs(velocity.x) > run_max_speed:
 		var signX = sign(velocity.x)
 		velocity.x -= sign(velocity.x) * run_friction
@@ -47,8 +47,21 @@ func get_movement():
 			velocity.x += run_acceleration
 		if left:
 			velocity.x -= run_acceleration
+	
+	# Jump
+	if jump:
+		if is_on_floor():
+			jumping = true
+			velocity.y = jump_speed
+		elif is_on_wall():
+			jumping = true
+			velocity.y = jump_speed
+			velocity.x = 1.5*run_max_speed * -sign(velocity.x)
 
 func _process(delta):
+	# DEBUG
+	if Input.is_key_pressed(KEY_R):
+		get_tree().reload_current_scene()
 	# Slice to target
 	if Input.is_action_just_pressed(\"mouse_left\"):
 		if targets.size() != 0:
@@ -113,11 +126,11 @@ func _draw():
 		draw_line(Vector2(0,0), tar.position - self.position, Color.aliceblue)
 "
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
 region = Rect2( 16, 16, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 16, 16, 16 )
 
@@ -133,14 +146,14 @@ region = Rect2( 16, 0, 16, 16 )
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ SubResource( 7 ) ],
+"frames": [ SubResource( 2 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 8 ) ],
+"frames": [ SubResource( 3 ) ],
 "loop": true,
 "name": "jump",
 "speed": 5.0
@@ -151,7 +164,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 11.558, 14.035 )
 
 [node name="Char" type="KinematicBody2D"]
@@ -163,12 +176,12 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
-frames = SubResource( 2 )
+frames = SubResource( 7 )
 animation = "idle"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1 )
-shape = SubResource( 3 )
+shape = SubResource( 8 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]

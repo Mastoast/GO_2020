@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Objects/Char.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Trail.tscn" type="PackedScene" id=2]
 
 [sub_resource type="NoiseTexture" id=1]
 width = 25
@@ -85,3 +86,5 @@ texture = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Room/StaticBody2D5"]
 shape = SubResource( 2 )
+
+[node name="Trail" parent="." instance=ExtResource( 2 )]
