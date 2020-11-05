@@ -6,6 +6,7 @@
 script/source = "extends KinematicBody2D
 
 var target = preload(\"res://Objects/Target.tscn\")
+var trail = preload(\"res://Objects/Trail.tscn\")
 
 export (int) var run_max_speed = 350
 export (int) var run_acceleration = 70
@@ -23,8 +24,6 @@ var jumping = false
 var n_max_target = 1
 
 func _ready():
-	var trail = get_parent().get_node(\"Trail\")
-	trail.trail(Vector2(500,500), Vector2(250,250))
 	pass
 
 func _enter_tree():
@@ -67,11 +66,17 @@ func _process(delta):
 		if targets.size() != 0:
 			var old_tar = targets.pop_front()
 			var diff = old_tar.position - self.position
-
+			
+			# Trail
+			var n_trail = trail.instance()
+			self.get_parent().add_child(n_trail)
+			n_trail.trail(self.position, old_tar.position)
+			
 			# Dash inertie
 			diff = diff.normalized() * abs(jump_speed)
 			velocity = diff
-
+			
+			# Change position
 			self.position = old_tar.position
 			old_tar.get_parent().remove_child(old_tar)
 			old_tar.free()

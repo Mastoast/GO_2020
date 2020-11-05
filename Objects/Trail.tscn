@@ -18,11 +18,13 @@ func _ready():
 	pass
 
 func _process(delta):
-	self.points[1] = origin + (target - origin) * ($Timer.wait_time - $Timer.time_left * $Timer.wait_time)
+	if (origin and target):
+		self.points[1] = origin + (target - origin) * (1 - $Timer.time_left / $Timer.wait_time)
 	
 func trail(origin, target):
 	self.origin = origin
 	self.target = target
+	self.points = [origin, target]
 	$Timer.start()
 
 func _on_Timer_timeout():
@@ -31,8 +33,6 @@ func _on_Timer_timeout():
 "
 
 [node name="Trail" type="Line2D"]
-position = Vector2( 1200, 500 )
-points = PoolVector2Array( 500, 500, 250, 250 )
 width = 4.0
 width_curve = SubResource( 1 )
 default_color = Color( 0.0823529, 0.14902, 0.478431, 1 )
@@ -43,6 +43,6 @@ antialiased = true
 script = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.2
 one_shot = true
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
