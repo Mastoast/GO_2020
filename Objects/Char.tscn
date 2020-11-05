@@ -74,7 +74,8 @@ func _process(delta):
 			
 			# Dash inertie
 			diff = diff.normalized() * abs(jump_speed)
-			velocity = diff
+			# TODO set max distance for full jump speed
+			velocity = Vector2(-sign(diff.x) * jump_speed, jump_speed)
 			
 			# Change position
 			self.position = old_tar.position
@@ -127,8 +128,15 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 
 func _draw():
+	var lower_dist = 100000
+	var lower_vect
 	for tar in targets:
-		draw_line(Vector2(0,0), tar.position - self.position, Color.aliceblue)
+		if (self.position.distance_to(tar.position)) < lower_dist:
+			lower_dist = self.position.distance_to(tar.position)
+			lower_vect = tar.position
+	
+	if lower_vect:
+		draw_line(Vector2(0,0), lower_vect - self.position, Color.aliceblue)
 "
 
 [sub_resource type="AtlasTexture" id=2]
