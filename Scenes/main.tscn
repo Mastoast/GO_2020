@@ -14,15 +14,15 @@ extents = Vector2( 12.4844, 12.3887 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 1582.14, 932.273 )
 current = true
-zoom = Vector2( 2, 2 )
+zoom = Vector2( 1.5, 1.5 )
 
 [node name="Char" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1219.52, 946.291 )
+position = Vector2( 1343.97, 937.882 )
 
 [node name="Room" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Room"]
-position = Vector2( 2074.04, 863.897 )
+position = Vector2( 1974.81, 857.17 )
 scale = Vector2( 2.74751, 27.7261 )
 __meta__ = {
 "_edit_group_": true
@@ -35,7 +35,7 @@ texture = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Room"]
-position = Vector2( 1090.5, 861.829 )
+position = Vector2( 1193.09, 868.556 )
 scale = Vector2( 2.74751, 27.7261 )
 __meta__ = {
 "_edit_group_": true
@@ -48,7 +48,7 @@ texture = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Room"]
-position = Vector2( 1173.02, 1202.62 )
+position = Vector2( 1179.75, 1131.98 )
 scale = Vector2( 100, 1 )
 __meta__ = {
 "_edit_group_": true
@@ -61,7 +61,7 @@ texture = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Room"]
-position = Vector2( 1631.55, 1048.83 )
+position = Vector2( 1732.46, 1008.47 )
 scale = Vector2( 9.68, 1 )
 __meta__ = {
 "_edit_group_": true
@@ -74,7 +74,7 @@ texture = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="Room"]
-position = Vector2( 1338.04, 1127.53 )
+position = Vector2( 1420.45, 1055.21 )
 scale = Vector2( 9.68, 1 )
 __meta__ = {
 "_edit_group_": true
