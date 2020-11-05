@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Objects/Char.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Enemy.tscn" type="PackedScene" id=2]
 
 [sub_resource type="NoiseTexture" id=1]
 width = 25
@@ -22,7 +23,7 @@ position = Vector2( 1343.97, 937.882 )
 [node name="Room" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Room"]
-position = Vector2( 1974.81, 857.17 )
+position = Vector2( 1969.15, 859.998 )
 scale = Vector2( 2.74751, 27.7261 )
 __meta__ = {
 "_edit_group_": true
@@ -35,7 +36,7 @@ texture = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Room"]
-position = Vector2( 1193.09, 868.556 )
+position = Vector2( 1200.16, 869.97 )
 scale = Vector2( 2.74751, 27.7261 )
 __meta__ = {
 "_edit_group_": true
@@ -85,3 +86,6 @@ texture = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Room/StaticBody2D5"]
 shape = SubResource( 2 )
+
+[node name="Enemy" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1670.66, 955.02 )
