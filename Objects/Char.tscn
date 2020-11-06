@@ -23,7 +23,7 @@ var targets : Array
 
 var velocity = Vector2()
 var jumping = false
-var n_max_target = 5
+var n_max_target = 25
 
 func _ready():
 	pass
@@ -68,6 +68,19 @@ func _process(delta):
 		if targets.size() != 0:
 			var old_tar = targets.pop_front()
 			var diff = old_tar.position - self.position
+			
+			# Find
+			$TargetRayCast.cast_to = diff
+			$TargetRayCast.force_raycast_update()
+			while $TargetRayCast.get_collider() != null:
+				if $TargetRayCast.get_collider() == old_tar:
+					break
+				print($TargetRayCast.get_collider())
+				$TargetRayCast.add_exception($TargetRayCast.get_collider())
+				$TargetRayCast.force_raycast_update()
+			
+			$TargetRayCast.clear_exceptions()
+			$TargetRayCast.add_exception(self)
 			
 			# Trail
 			var n_trail = trail.instance()
@@ -147,19 +160,19 @@ region = Rect2( 16, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 16, 16 )
+region = Rect2( 0, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
-region = Rect2( 16, 0, 16, 16 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
-region = Rect2( 32, 0, 16, 16 )
+region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 16, 16, 16 )
+region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
@@ -168,14 +181,14 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "run",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 6 ) ],
+"frames": [ SubResource( 3 ) ],
 "loop": true,
 "name": "jump",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "run",
 "speed": 5.0
 } ]
 
@@ -183,6 +196,8 @@ animations = [ {
 extents = Vector2( 11.558, 14.035 )
 
 [node name="Char" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 7
 script = SubResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -199,3 +214,5 @@ position = Vector2( 0, 1 )
 shape = SubResource( 8 )
 
 [node name="TargetRayCast" type="RayCast2D" parent="."]
+collision_mask = 2147483655
+collide_with_areas = true

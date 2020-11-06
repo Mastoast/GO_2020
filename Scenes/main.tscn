@@ -19,8 +19,6 @@ zoom = Vector2( 1.5, 1.5 )
 
 [node name="Char" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1343.97, 937.882 )
-collision_layer = 2
-collision_mask = 7
 
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1675.7, 773.386 )
