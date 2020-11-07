@@ -21,7 +21,7 @@ zoom = Vector2( 1.5, 1.5 )
 position = Vector2( 1343.97, 937.882 )
 
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1675.7, 773.386 )
+position = Vector2( 1896.57, 1082.98 )
 collision_layer = 2
 
 [node name="Room" type="Node2D" parent="."]
@@ -76,6 +76,19 @@ __meta__ = {
 texture = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Room/StaticBody2D4"]
+shape = SubResource( 2 )
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="Room"]
+position = Vector2( 1426.64, 878.215 )
+scale = Vector2( 9.68, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Room/StaticBody2D6"]
+texture = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Room/StaticBody2D6"]
 shape = SubResource( 2 )
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="Room"]

@@ -37,7 +37,7 @@ func get_movement():
 	var jump = Input.is_action_just_pressed('ui_up')
 
 
-	# Run	
+	# Run
 	if not (right or left) or abs(velocity.x) > run_max_speed:
 		var signX = sign(velocity.x)
 		velocity.x -= sign(velocity.x) * run_friction
@@ -63,39 +63,13 @@ func _process(delta):
 	# DEBUG
 	if Input.is_key_pressed(KEY_R):
 		get_tree().reload_current_scene()
+	if Input.is_key_pressed(KEY_ESCAPE):
+		get_tree().quit()
+	
 	# Slice to target
 	if Input.is_action_just_pressed(\"mouse_left\"):
 		if targets.size() != 0:
-			var old_tar = targets.pop_front()
-			var diff = old_tar.position - self.position
-			
-			# Find
-			$TargetRayCast.cast_to = diff
-			$TargetRayCast.force_raycast_update()
-			while $TargetRayCast.get_collider() != null:
-				if $TargetRayCast.get_collider() == old_tar:
-					break
-				print($TargetRayCast.get_collider())
-				$TargetRayCast.add_exception($TargetRayCast.get_collider())
-				$TargetRayCast.force_raycast_update()
-			
-			$TargetRayCast.clear_exceptions()
-			$TargetRayCast.add_exception(self)
-			
-			# Trail
-			var n_trail = trail.instance()
-			self.get_parent().add_child(n_trail)
-			n_trail.trail(self.position, old_tar.position)
-			
-			# Dash inertie
-			diff = diff.normalized() * abs(jump_speed)
-			# TODO set max distance for full jump speed
-			velocity = Vector2(-sign(diff.x) * jump_speed, jump_speed)
-			
-			# Change position
-			self.position = old_tar.position
-			old_tar.get_parent().remove_child(old_tar)
-			old_tar.free()
+			slice()
 
 	# Pop target
 	if Input.is_action_just_pressed(\"mouse_right\"):
@@ -125,6 +99,50 @@ func _process(delta):
 
 	# Refresh visuals
 	update()
+
+func slice():
+	var old_tar = targets.pop_front()
+	var dest_pos = old_tar.position
+	var diff = dest_pos - self.position
+	var is_bonk = false
+	
+	# Find colliders in the way
+	$TargetRayCast.cast_to = diff
+	$TargetRayCast.force_raycast_update()
+	while $TargetRayCast.get_collider() != null:
+		print($TargetRayCast.get_collision_point())
+		var n_col = $TargetRayCast.get_collider()
+		if n_col == old_tar:
+			break
+		# Bonk
+		elif not (n_col.has_method(\"pierce\") && n_col.pierce()):
+			dest_pos = $TargetRayCast.get_collision_point()
+			diff = dest_pos - self.position
+			is_bonk = true
+			break
+		$TargetRayCast.add_exception(n_col)
+		$TargetRayCast.force_raycast_update()
+	
+	$TargetRayCast.clear_exceptions()
+	$TargetRayCast.add_exception(self)
+	
+	# Trail
+	var n_trail = trail.instance()
+	self.get_parent().add_child(n_trail)
+	n_trail.trail(self.position, dest_pos)
+	
+	# Dash inertie
+	if is_bonk:
+		pass
+	else:
+		# TODO rework
+		diff = diff.normalized() * abs(jump_speed)
+		velocity = Vector2(-sign(diff.x) * jump_speed, jump_speed)
+	
+	# Change position
+	self.position = dest_pos
+	old_tar.get_parent().remove_child(old_tar)
+	old_tar.free()
 
 func set_anim(name):
 	if $AnimatedSprite.animation != name:

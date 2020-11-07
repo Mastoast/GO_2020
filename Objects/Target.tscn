@@ -2,7 +2,7 @@
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Area2D
 
 export (float) var radius = 25.0
@@ -31,9 +31,12 @@ func rangef(start: float, end: float, step: float):
 		res.push_back(i)
 		i += step
 	return res
+
+func pierce():
+	return true
 "
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
@@ -50,11 +53,11 @@ animations = [ {
 radius = 15.0
 
 [node name="Target" type="Area2D"]
-script = SubResource( 4 )
+script = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 animation = "New Anim"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
