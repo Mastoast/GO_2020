@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="BTriangle" type="Polygon2D"]
+color = Color( 0, 0, 0, 1 )
+antialiased = true
+polygon = PoolVector2Array( 0, 0, 60, 60, 120, 0 )

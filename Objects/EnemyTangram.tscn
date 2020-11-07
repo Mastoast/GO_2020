@@ -1,0 +1,112 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Sprites/enemies.png" type="Texture" id=1]
+[ext_resource path="res://Polygons/Square.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Polygons/MidTriangle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Polygons/BigTriangle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Polygons/Trapeze.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Polygons/SmallTriangle.tscn" type="PackedScene" id=6]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+export (int) var run_max_speed = 350
+export (int) var run_acceleration = 70
+export (int) var run_friction = 35
+
+export (int) var gravity = 1500
+
+var dir = 1
+var velocity = Vector2(0,0)
+var jumping = false
+
+func _ready():
+	pass
+
+func _physics_process(delta):
+	# Gravity
+	velocity.y += gravity * delta
+	if is_on_wall():
+		dir = - dir
+		$AnimatedSprite.flip_h = (dir == - 1)
+	velocity.x = clamp(velocity.x + (dir * run_acceleration), -run_max_speed, run_max_speed)
+	velocity = move_and_slide(velocity, Vector2(0, -1))
+
+func pierce():
+	queue_free()
+	return true
+"
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 16, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 13.2452, 16.2936 )
+
+[node name="Enemy" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 2147483655
+script = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
+frames = SubResource( 6 )
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 7 )
+
+[node name="RefTangram" type="Node2D" parent="."]
+
+[node name="BTriangle" parent="RefTangram" instance=ExtResource( 4 )]
+position = Vector2( -13.5213, -38.4702 )
+rotation = 2.17309
+
+[node name="Square" parent="RefTangram/BTriangle" instance=ExtResource( 2 )]
+position = Vector2( -6.83743, 50.7399 )
+rotation = -1.81491
+
+[node name="SmallTriangle2" parent="RefTangram/BTriangle/Square" instance=ExtResource( 6 )]
+position = Vector2( -15, -30 )
+scale = Vector2( 1, 1 )
+
+[node name="SmallTriangle" parent="RefTangram/BTriangle/Square" instance=ExtResource( 6 )]
+position = Vector2( 15, -30 )
+rotation = -3.14159
+scale = Vector2( 1, 1 )
+
+[node name="BTriangle2" parent="RefTangram" instance=ExtResource( 4 )]
+position = Vector2( 123.674, -15.205 )
+rotation = 4.48063
+
+[node name="MidTriangle" parent="RefTangram/BTriangle2" instance=ExtResource( 3 )]
+position = Vector2( 30, -60 )
+
+[node name="Trapeze" parent="RefTangram/BTriangle2" instance=ExtResource( 5 )]
+position = Vector2( 50, 30 )
+rotation = 4.98066
