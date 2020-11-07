@@ -12,21 +12,21 @@
 position = Vector2( 60, 30 )
 
 [node name="BTriangle2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 90, 60 )
+position = Vector2( 178.995, 32.454 )
 rotation = 1.5708
 
 [node name="SmallTriangle" parent="." instance=ExtResource( 5 )]
-position = Vector2( 45, 60 )
+position = Vector2( 61.4217, 29.2756 )
 
 [node name="SmallTriangle2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 90, 105 )
+position = Vector2( 213.957, 119.303 )
 rotation = -1.5708
 
 [node name="MidTriangle" parent="." instance=ExtResource( 2 )]
-position = Vector2( 30, 90 )
+position = Vector2( 115.287, 159.395 )
 
 [node name="Trapeze" parent="." instance=ExtResource( 1 )]
-position = Vector2( 15, 45 )
+position = Vector2( -72.9354, 82.6109 )
 
 [node name="Square" parent="." instance=ExtResource( 3 )]
-position = Vector2( 60, 90 )
+position = Vector2( 171.244, 137.146 )

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Objects/Char.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Objects/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/EnemyFox.tscn" type="PackedScene" id=3]
 
 [sub_resource type="NoiseTexture" id=1]
 width = 25
@@ -20,9 +20,8 @@ zoom = Vector2( 1.5, 1.5 )
 [node name="Char" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1343.97, 937.882 )
 
-[node name="Enemy" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1896.57, 1082.98 )
-collision_layer = 2
+[node name="Enemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1755.27, 860.986 )
 
 [node name="Room" type="Node2D" parent="."]
 
