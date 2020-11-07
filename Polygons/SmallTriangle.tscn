@@ -1,7 +1,9 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="NoiseTexture" id=1]
 
 [node name="SmallTriangle" type="Polygon2D"]
-color = Color( 0, 0, 0, 1 )
 offset = Vector2( -30, -30 )
 antialiased = true
+texture = SubResource( 1 )
 polygon = PoolVector2Array( 30, 30, 60, 60, 30, 90 )
