@@ -503,7 +503,7 @@ rotation = -4.35781
 texture = SubResource( 3 )
 skeleton = NodePath("../../Skeleton2D")
 uv = PoolVector2Array( 0, 0, 60, 60, 120, 0 )
-bones = [ NodePath("Body1"), PoolRealArray( 1, 1, 0 ), NodePath("Body1/Head"), PoolRealArray( 0, 1, 0 ), NodePath("Body1/Head/LEar"), PoolRealArray( 0, 0, 0 ), NodePath("Body1/Head/REar"), PoolRealArray( 0, 0, 0 ), NodePath("Body1/FeetL"), PoolRealArray( 0, 0, 1 ), NodePath("Body1/BodyMid"), PoolRealArray( 0, 0, 0 ), NodePath("Body1/BodyMid/Body2"), PoolRealArray( 1, 0, 0 ), NodePath("Body1/BodyMid/Body2/FeetR"), PoolRealArray( 0, 0, 0 ), NodePath("Body1/BodyMid/Body2/Tail"), PoolRealArray( 0, 0, 0 ) ]
+bones = [ NodePath("Body1"), PoolRealArray( 1, 1, 0 ), NodePath("Body1/Head"), PoolRealArray( 0, 1, 0 ), NodePath("Body1/Head/LEar"), PoolRealArray( 0, 0, 0 ), NodePath("Body1/Head/REar"), PoolRealArray( 0, 0, 0 ), NodePath("Body1/FeetL"), PoolRealArray( 0, 0, 1 ), NodePath("Body1/BodyMid"), PoolRealArray( 0, 0, 0 ), NodePath("Body1/BodyMid/Body2"), PoolRealArray( 1, 0, 0 ), NodePath("Body1/BodyMid/Body2/FeetR"), PoolRealArray( 1, 0, 0 ), NodePath("Body1/BodyMid/Body2/Tail"), PoolRealArray( 0, 0, 0 ) ]
 
 [node name="Square" parent="RefTangram/BTriangle" instance=ExtResource( 2 )]
 position = Vector2( 53.4646, 100.335 )
@@ -543,7 +543,7 @@ position = Vector2( 62.0807, 59.8265 )
 rotation = 5.69937
 skeleton = NodePath("../../../Skeleton2D")
 uv = PoolVector2Array( 0, 0, 0, 60, 30, 90, 30, 30 )
-bones = [ NodePath("Body1"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/Head"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/Head/LEar"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/Head/REar"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/FeetL"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/BodyMid"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/BodyMid/Body2"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/BodyMid/Body2/FeetR"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/BodyMid/Body2/Tail"), PoolRealArray( 0, 1, 1, 1 ) ]
+bones = [ NodePath("Body1"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/Head"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/Head/LEar"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/Head/REar"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/FeetL"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/BodyMid"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/BodyMid/Body2"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/BodyMid/Body2/FeetR"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Body1/BodyMid/Body2/Tail"), PoolRealArray( 1, 1, 1, 1 ) ]
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
 
@@ -553,32 +553,35 @@ rest = Transform2D( 1, 0, 0, 1, -40.363, 9.24986 )
 
 [node name="Head" type="Bone2D" parent="Skeleton2D/Body1"]
 position = Vector2( -39.7751, -24.1053 )
+rotation = -0.197873
 rest = Transform2D( 1, 0, 0, 1, -39.7751, -24.1053 )
 
 [node name="LEar" type="Bone2D" parent="Skeleton2D/Body1/Head"]
 position = Vector2( -15.4434, -24.9738 )
-rotation = -1.71042
+rotation = -2.17857
 rest = Transform2D( -0.139173, -0.990268, 0.990268, -0.139173, -15.4434, -24.9738 )
 default_length = 25.0
 
 [node name="REar" type="Bone2D" parent="Skeleton2D/Body1/Head"]
 position = Vector2( 21.3797, -23.4008 )
-rotation = -1.34961
+rotation = -0.21549
 rest = Transform2D( 0.219387, -0.975638, 0.975638, 0.219387, 21.3797, -23.4008 )
 default_length = 28.0
 
 [node name="FeetL" type="Bone2D" parent="Skeleton2D/Body1"]
 position = Vector2( 1.60497, 32.9592 )
-rotation = 1.60396
+rotation = 1.48257
 rest = Transform2D( -0.0331552, 0.99945, -0.99945, -0.0331552, 1.60497, 32.9592 )
 default_length = 31.0
 
 [node name="BodyMid" type="Bone2D" parent="Skeleton2D/Body1"]
 position = Vector2( 41.3642, -24.9342 )
+rotation = 0.000293313
 rest = Transform2D( 1, 0, 0, 1, 41.3642, -24.9342 )
 
 [node name="Body2" type="Bone2D" parent="Skeleton2D/Body1/BodyMid"]
 position = Vector2( 35.5779, 19.8889 )
+rotation = -0.259172
 rest = Transform2D( 1, 0, 0, 1, 35.5779, 19.8889 )
 
 [node name="FeetR" type="Bone2D" parent="Skeleton2D/Body1/BodyMid/Body2"]
@@ -589,7 +592,7 @@ default_length = 49.0
 
 [node name="Tail" type="Bone2D" parent="Skeleton2D/Body1/BodyMid/Body2"]
 position = Vector2( 44.9879, -14.2952 )
-rotation = -1.42653
+rotation = -1.029
 rest = Transform2D( 0.143762, -0.989612, 0.989612, 0.143762, 44.9879, -14.2952 )
 default_length = 68.0
 
