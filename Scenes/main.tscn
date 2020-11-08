@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Objects/Char.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Environments/Tree_2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Objects/EnemyFox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Environments/Tree_1.tscn" type="PackedScene" id=4]
 
 [sub_resource type="NoiseTexture" id=1]
 width = 25
@@ -102,3 +104,9 @@ texture = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Room/StaticBody2D5"]
 shape = SubResource( 2 )
+
+[node name="Tree_1" parent="." instance=ExtResource( 4 )]
+position = Vector2( 365.612, 913.789 )
+
+[node name="Tree_2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 674.341, 914.828 )

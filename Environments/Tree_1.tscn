@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Polygons/MidTriangle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Polygons/Trapeze.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Polygons/BigTriangle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Polygons/Square.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Polygons/SmallTriangle.tscn" type="PackedScene" id=5]
+
+[sub_resource type="NoiseTexture" id=1]
+
+[sub_resource type="NoiseTexture" id=2]
+
+[sub_resource type="NoiseTexture" id=3]
+
+[sub_resource type="NoiseTexture" id=4]
+
+[sub_resource type="NoiseTexture" id=5]
+
+[node name="Tree_1" type="Node2D"]
+
+[node name="BTriangle" type="Polygon2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 140, 100 )
+rotation = 3.14159
+antialiased = true
+texture = SubResource( 1 )
+polygon = PoolVector2Array( 0, 0, 60, 60, 120, 0 )
+
+[node name="BTriangle2" type="Polygon2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 140, 160 )
+rotation = 3.14181
+antialiased = true
+texture = SubResource( 1 )
+polygon = PoolVector2Array( 0, 0, 60, 60, 120, 0 )
+
+[node name="SmallTriangle" type="Polygon2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 32, 145 )
+rotation = 3.92699
+offset = Vector2( -30, -30 )
+antialiased = true
+texture = SubResource( 2 )
+polygon = PoolVector2Array( 30, 30, 60, 60, 30, 90 )
+
+[node name="SmallTriangle2" type="Polygon2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 32, 102 )
+rotation = 0.785398
+offset = Vector2( -30, -30 )
+antialiased = true
+texture = SubResource( 2 )
+polygon = PoolVector2Array( 30, 30, 60, 60, 30, 90 )
+
+[node name="MidTriangle" type="Polygon2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 122, 41.91 )
+rotation = 2.35619
+offset = Vector2( 0, -60 )
+antialiased = true
+texture = SubResource( 3 )
+polygon = PoolVector2Array( 0, 60, 0, 120, 60, 120 )
+
+[node name="Trapeze" type="Polygon2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 86, 103 )
+rotation = -0.785398
+antialiased = true
+texture = SubResource( 4 )
+polygon = PoolVector2Array( 0, 0, 0, 60, 30, 90, 30, 30 )
+
+[node name="Square" type="Polygon2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 60, 160 )
+rotation = 0.785398
+offset = Vector2( -30, -90 )
+antialiased = true
+texture = SubResource( 5 )
+polygon = PoolVector2Array( 60, 60, 30, 90, 60, 120, 90, 90 )
