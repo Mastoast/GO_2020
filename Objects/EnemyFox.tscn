@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Polygons/Square.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Polygons/MidTriangle.tscn" type="PackedScene" id=3]
@@ -39,9 +39,7 @@ func pierce():
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 117.034, 86.5607 )
 
-[sub_resource type="AnimatedTexture" id=3]
-
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "Idle"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Skeleton2D/Body1:position")
@@ -260,7 +258,7 @@ tracks/17/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "Run"
 length = 3.0
 loop = true
@@ -500,7 +498,6 @@ position = Vector2( -34.8768, 65.2638 )
 [node name="BTriangle" parent="RefTangram" instance=ExtResource( 4 )]
 position = Vector2( 37.0812, -100.119 )
 rotation = -4.35781
-texture = SubResource( 3 )
 skeleton = NodePath("../../Skeleton2D")
 uv = PoolVector2Array( 0, 0, 60, 60, 120, 0 )
 bones = [ NodePath("Body1"), PoolRealArray( 1, 1, 0 ), NodePath("Body1/Head"), PoolRealArray( 0, 1, 0 ), NodePath("Body1/Head/LEar"), PoolRealArray( 0, 0, 0 ), NodePath("Body1/Head/REar"), PoolRealArray( 0, 0, 0 ), NodePath("Body1/FeetL"), PoolRealArray( 0, 0, 1 ), NodePath("Body1/BodyMid"), PoolRealArray( 0, 0, 0 ), NodePath("Body1/BodyMid/Body2"), PoolRealArray( 1, 0, 0 ), NodePath("Body1/BodyMid/Body2/FeetR"), PoolRealArray( 1, 0, 0 ), NodePath("Body1/BodyMid/Body2/Tail"), PoolRealArray( 0, 0, 0 ) ]
@@ -598,5 +595,5 @@ default_length = 68.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
-anims/Idle = SubResource( 4 )
-anims/Run = SubResource( 5 )
+anims/Idle = SubResource( 3 )
+anims/Run = SubResource( 4 )

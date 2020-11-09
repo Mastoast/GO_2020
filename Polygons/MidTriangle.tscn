@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=2]
 
-[sub_resource type="NoiseTexture" id=1]
+[sub_resource type="AtlasTexture" id=1]
 
 [node name="MidTriangle" type="Polygon2D"]
+color = Color( 0, 0, 0, 1 )
 offset = Vector2( 0, -60 )
 antialiased = true
 texture = SubResource( 1 )

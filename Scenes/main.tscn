@@ -154,9 +154,11 @@ shape = SubResource( 2 )
 
 [node name="Tree_1" parent="." instance=ExtResource( 4 )]
 position = Vector2( 365.612, 913.789 )
+z_index = -1
 
 [node name="Tree_2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 674.341, 914.828 )
+z_index = -1
 
 [node name="Particles2D" type="Particles2D" parent="."]
 emitting = false
