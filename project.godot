@@ -72,5 +72,5 @@ mouse_right={
 [rendering]
 
 quality/2d/use_pixel_snap=true
-environment/default_clear_color=Color( 0.552941, 0.552941, 0.552941, 1 )
+environment/default_clear_color=Color( 0.854902, 0.854902, 0.854902, 1 )
 environment/default_environment="res://default_env.tres"

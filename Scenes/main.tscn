@@ -140,7 +140,7 @@ texture = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="Room"]
-position = Vector2( 1420.45, 1055.21 )
+position = Vector2( 1422.97, 1026.23 )
 scale = Vector2( 9.68, 1 )
 __meta__ = {
 "_edit_group_": true
